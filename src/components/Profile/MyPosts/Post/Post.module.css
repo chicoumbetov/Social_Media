@@ -1,0 +1,15 @@
+.item {
+  color: black;
+  font-style: oblique;
+  margin-top: 5px;
+}
+
+.item img{
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+}
+
+.commentButton {
+  margin-left: 10px;
+}

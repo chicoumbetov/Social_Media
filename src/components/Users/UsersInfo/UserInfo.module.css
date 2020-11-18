@@ -1,0 +1,9 @@
+.picture img {
+  width: 500px;
+}
+
+.item img{
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+}

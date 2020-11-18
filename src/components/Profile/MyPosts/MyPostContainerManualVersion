@@ -1,0 +1,28 @@
+const MyPostsContainer = () => {
+  //контейнерная компонента - обёртка для простой компоненты и может содержать "избыточную" инфу даже из BLL.
+  return (
+    <StoreContext.Consumer> 
+      {
+      (store) => {
+        let state = store.getState();
+
+        let addPost = () => {
+          store.dispatch(addPostActionCreator());
+        }
+      
+        let onPostChange = (text) => {
+          let action = updateNewPostTextActionCreator(text);
+          store.dispatch(action);
+        }
+
+        return <MyPosts updateNewPostText={onPostChange}
+          addPost={addPost}
+          postsData={state.profilePage.postsData}  //must be postsData outside , PostsData inside
+          newPostText={state.profilePage.newPostText}
+        />
+      }
+    }
+    </StoreContext.Consumer>
+    
+  )
+}

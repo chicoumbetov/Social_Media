@@ -1,0 +1,126 @@
+{/*
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import sideBarReducer from "./sidebar-reducer";
+
+let store = {
+
+    //_ sign means that it's private and no access from outside of store.
+    //state with data.
+    //state ={} now is written this way: _state: {} which is private.
+    _state: {
+
+        profilePage: {
+
+            postsData:
+                [
+                    { id: 1, message: "Hi, How is it going?", likesCount: 11 },
+                    { id: 2, message: "Hi, How r u?", likesCount: 12 }
+                ],
+            newPostText: 'IT_KA.com'
+        },
+
+        dialogsPage: {
+
+            dialogsData:    //dialogs
+                [
+                    { id: 1, name: 'Aiya' },
+                    { id: 2, name: 'Kumar' },
+                    { id: 3, name: 'Balgyn' },
+                    { id: 4, name: 'Meir' },
+                    { id: 5, name: 'Dana' },
+                    { id: 6, name: 'Mura' }
+                ],
+            messageData:    //messages
+                [
+                    { id: 1, message: "Yo" },
+                    { id: 2, message: "How is your IT KA project? " },
+                    { id: 3, message: "Hi" },
+                    { id: 4, message: "Hi bratishka" },
+                    { id: 5, message: "Hey" }
+                ],
+            newMessageBody: ''
+        },
+        sideBar: {}
+    },
+
+    //_ is method of object store.
+    _callSubscriber() {
+        console.log('State is changed');
+    },
+
+    //no rights to access to _state because it's private
+    //so we use method getState to get private _state.
+    //must use "this" to access to method inside of same object.
+
+    getState() {
+        return this._state;
+    },
+
+    //same refactoring
+    subscribe(observer) {
+        this._callSubscriber = observer;
+    },
+
+    //method also of object store. function become method.refactoring.
+    //function "addPost = () => {}" is written now like this: addPost () {}
+    //addPost() {}, which is now in dispatch
+
+    //same thing like with addPost:
+    //updateNewPostText(newText) {},which is now in dispatch
+
+    //give me object action into dispatch that sends action to store
+    dispatch(action) { // action has to have type { type 'ADD-POST (name of action)'}
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sideBar = sideBarReducer(this._state.sideBar, action);
+
+        this._callSubscriber(this._state);
+
+    }
+}
+
+//window.state = state; // to be able to see updating of state of BLL in console Developer tools
+export default store;
+
+
+//now instead of exporting state we export store globally by "window"
+window.store = store;
+*/}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// store - OOP
+/*
+if (action.type === 'ADD_POST') { //if call in dispatch is equal only and exactly to ADD_POST then execute this:
+    let newPost = {
+        id: 3,
+        message: this._state.profilePage.newPostText,
+        likesCount: 0
+    }
+    this._state.profilePage.postsData.push(newPost);
+    this._state.profilePage.newPostText = '' ;
+    this._callSubscriber(this._state);
+} else if (action.type === UPDATE_NEW_POST_TEXT) {
+    this._state.profilePage.newPostText = action.newText;
+    this._callSubscriber(this._state);
+
+} else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+    this._state.dialogsPage.newMessageBody = action.body;
+    this._callSubscriber(this._state);
+} else if (action.type === SEND_MESSAGE) {
+    let body = this._state.dialogsPage.newMessageBody;
+    this._state.dialogsPage.newMessageBody = '' ;
+    this._state.dialogsPage.messageData.push ({ id: 6, message: body}) ;
+    this._callSubscriber(this._state); //_callSubscriber says about changes in _state to outside of store.
+}*/
