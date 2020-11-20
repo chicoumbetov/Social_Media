@@ -3,5 +3,9 @@
 }
 
 .descriptionBlock img {
-  width: 200px;
+  width: 150px;
+}
+
+.mainPhoto {
+  max-width: 100px;
 }

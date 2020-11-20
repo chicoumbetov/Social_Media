@@ -4,11 +4,18 @@ import Preloader from '../../common/Preloader/Preloader';
 import classes from './ProfileInfo.module.css';
 //import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
+import userPhoto from '../../Users/images/user.png';
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
 
   if (!profile) {
     return <Preloader />
+  }
+
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length) { // if there is length of file then call callback
+      savePhoto(e.target.files[0]) //give there chosen photo
+    }
   }
 
   return (
@@ -19,7 +26,8 @@ const ProfileInfo = ({profile, status, updateStatus}) => {
       </div>
 
       <div className={classes.descriptionBlock}>
-        <img src={profile.photos.large} alt="profile" />
+        <img src={profile.photos.large || userPhoto} className={classes.mainPhoto} alt="profile" />
+        {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
         <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
       </div>
 

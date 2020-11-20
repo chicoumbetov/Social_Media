@@ -71,7 +71,8 @@ let AppContainer = compose(
   connect(mapStateToProps, { initializeApp }))(App)
 
 const SamuraiJSAp = (props) => {
-  return <HashRouter basename={process.env.PUBLIC_URL}>
+  return <HashRouter >
+    {/*no need in HashRouter: basename={process.env.PUBLIC_URL}*/}
     <Provider store={store} >
       <AppContainer />
     </Provider>
