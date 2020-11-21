@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { Component } from 'react';
-import { HashRouter, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
@@ -26,8 +26,19 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 
 class App extends Component {
 
+  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    //if (reason, promise) then should use thunk
+    alert(promiseRejectionEvent)
+    //console.error(promiseRejectionEvent)
+  }
+
   componentDidMount() {
     this.props.initializeApp()
+    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors)
   }
 
   render() {
@@ -41,19 +52,24 @@ class App extends Component {
         <Navbar />
 
         <div className="app-wrapper-content">
-          <Route path='/profile/:userId?'
-            render={ withSuspense(ProfileContainer) }
-          />
+          <Switch>
+            <Redirect exact from="/" to="/profile" render={withSuspense(ProfileContainer)}/>
+            {/* Variant Dimych: <Route exact path='/' render={ () => <Redirect to={"/profile"}/>}/>      */}
+            <Route path='/profile/:userId?'
+              render={withSuspense(ProfileContainer)}
+            />
 
-          <Route path='/dialogs'
-            render={withSuspense(DialogsContainer)}
-          />
+            <Route path='/dialogs'
+              render={withSuspense(DialogsContainer)}
+            />
 
-          <Route path='/news' render={() => <News />} />
-          <Route path='/music' component={Music} />
-          <Route path='/users' render={() => <UsersContainer />} />
-          <Route path='/settings' component={Settings} />
-          <Route path='/login' render={() => <LoginPage />} />
+            <Route path='/news' render={() => <News />} />
+            <Route path='/music' component={Music} />
+            <Route path='/users' render={() => <UsersContainer />} />
+            <Route path='/settings' component={Settings} />
+            <Route path='/login' render={() => <LoginPage />} />
+            <Route path='*' render={() => <div>404 NOT FOUND</div>} />
+          </Switch>
         </div>
 
       </div>
@@ -71,12 +87,12 @@ let AppContainer = compose(
   connect(mapStateToProps, { initializeApp }))(App)
 
 const SamuraiJSAp = (props) => {
-  return <HashRouter >
+  return <BrowserRouter >
     {/*no need in HashRouter: basename={process.env.PUBLIC_URL}*/}
     <Provider store={store} >
       <AppContainer />
     </Provider>
-  </HashRouter>
+  </BrowserRouter>
 }
 
 export default SamuraiJSAp;
