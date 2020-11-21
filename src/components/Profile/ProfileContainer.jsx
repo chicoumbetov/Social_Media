@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import { getUserProfile, getStatus, updateStatus, savePhoto } from "../../redux/profile-reducer";
+import { getUserProfile, getStatus, updateStatus, savePhoto, saveProfile } from "../../redux/profile-reducer";
 import { withRouter } from 'react-router-dom';
 //uncomment if I want limit access to profile //import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -56,7 +56,7 @@ let mapStateToProps = (state) => ({
 })
 
 export default compose(
-  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhoto }),   //4   //thunks in curly brackets, which helps to give further props.
+  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhoto, saveProfile }),   //4   //thunks in curly brackets, which helps to give further props.
   withRouter,                                     //3
   //withAuthRedirect                            //2
 )(ProfileContainer)                              //1

@@ -21,7 +21,8 @@ const LoginForm = ({ handleSubmit, error }) => {
 
             { error && <div className={style.formSummaryError}>
                 {error}
-            </div>}
+            </div>
+            }
 
             <div>
                 <button>Login</button>

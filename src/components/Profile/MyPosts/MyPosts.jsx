@@ -29,7 +29,7 @@ const MyPosts = React.memo(props => {
   let postsElements =
     [...props.postsData]
       .reverse()
-      .map(NameLikes => <Post message={NameLikes.message} likesCount={NameLikes.likesCount} />);
+      .map(NameLikes => <Post key={NameLikes.id} message={NameLikes.message} likesCount={NameLikes.likesCount} />);
   //oldArray postsData of newArray postsElements is in Profile.jsx
   //let newPostElement = React.createRef();
   //callback

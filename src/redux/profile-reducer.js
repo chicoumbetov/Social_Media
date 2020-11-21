@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { usersAPI, profileAPI } from "../api/api";
 
 const ADD_POST = 'ADD_POST';
@@ -69,7 +70,7 @@ const profileReducer = (state = initialState, action) => {
         case SAVE_PHOTO_SUCCESS: {
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos} 
+                profile: { ...state.profile, photos: action.photos }
             }
         }
 
@@ -101,15 +102,30 @@ export const getStatus = (userId) => async (dispatch) => {
 
 export const updateStatus = (status) => async (dispatch) => {
     let response = await profileAPI.updateStatus(status)
-    if (response.data.resultCode === 0) { }
+    if (response.data.resultCode === 0) { 
     dispatch(setStatus(status))
+    }
 }
 
 export const savePhoto = (file) => async (dispatch) => {
     let response = await profileAPI.savePhoto(file)
-    
-    if (response.data.resultCode === 0) { } //uploaded photo of profile will come in data
+
+    if (response.data.resultCode === 0) {  //uploaded photo of profile will come in data 
     dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
+
+export const saveProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.userId
+    const response = await profileAPI.saveProfile(profile)
+
+    if (response.data.resultCode === 0) {  //uploaded photo of profile will come in data
+        dispatch(getUserProfile(userId))
+    } else {
+        dispatch(stopSubmit("edit-profile", {"contacts": {"facebook": response.data.messages[0] }} )) //error facebook form
+        //dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}))     //general error
+        return Promise.reject(response.data.messages[0])
+    }
 }
 
 export default profileReducer;
