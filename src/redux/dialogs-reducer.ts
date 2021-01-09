@@ -1,4 +1,16 @@
+//import { sendMessageCreator } from './dialogs-reducer';
+//import { InitialStateType } from './auth-reducer';
 const SEND_MESSAGE = 'SEND_MESSAGE'; //name of action
+
+type DialogType = {
+    id: number
+    name: string
+}
+
+type MessageType = {
+    id: number
+    message: string
+}
 
 let initialState = {
     dialogsData:    //dialogs
@@ -9,7 +21,7 @@ let initialState = {
             { id: 4, name: 'Meir' },
             { id: 5, name: 'Dana' },
             { id: 6, name: 'Mura' }
-        ],
+        ] as Array<DialogType>,
     messageData:    //messages
         [
             { id: 1, message: "Yo" },
@@ -17,10 +29,12 @@ let initialState = {
             { id: 3, message: "Hi" },
             { id: 4, message: "Hi bratishka" },
             { id: 5, message: "Hey" }
-        ]
-};
+        ] as Array<MessageType>
+}
 
-const dialogsReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState
+
+const dialogsReducer = (state = initialState, action: any) => {
     //switch used instead of if else because we are using discrete constants.
 
     //    let stateCopy;
@@ -47,6 +61,11 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const sendMessageCreator = (newMessageBody) => ({ type: SEND_MESSAGE, newMessageBody: newMessageBody });
+type SendMessageCreatorActionType = {
+    type: typeof SEND_MESSAGE
+    newMessageBody: string
+}
+
+export const sendMessageCreator = (newMessageBody: string): SendMessageCreatorActionType => ({ type: SEND_MESSAGE, newMessageBody: newMessageBody });
 
 export default dialogsReducer;
