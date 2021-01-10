@@ -3,11 +3,21 @@
 }
 
 .pageNumber {
-    padding: 2px;
+    padding: 5px;
     border: 1px solid grey;
+    cursor: pointer;
+    background-color: beige;
+    border-radius: 5px;
 }
 
 .pageNumber.selectedPage {
     font-weight: bold;
     border-color: black;
+    
+}
+
+.paginator{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
 }

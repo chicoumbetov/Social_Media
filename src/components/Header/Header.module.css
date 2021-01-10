@@ -1,7 +1,8 @@
 .header {
   grid-area: h;
-  
-  background-color: greenyellow; 
+  margin-top: 10px;
+  background-color: none;
+  border: 3px solid #eee;
   padding: 7px;
 }
 

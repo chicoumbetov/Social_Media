@@ -23,6 +23,16 @@
 }
 
 .preloader svg{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+}
+
+.pageTitle{
+    display: flex;
+    justify-content: center;
+}
+
+.userInfo{
+    display: flex;
+    justify-content: center;
 }

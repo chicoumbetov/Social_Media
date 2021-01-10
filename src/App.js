@@ -65,7 +65,7 @@ class App extends Component {
 
             <Route path='/news' render={() => <News />} />
             <Route path='/music' component={Music} />
-            <Route path='/users' render={() => <UsersContainer />} />
+            <Route path='/users' render={() => <UsersContainer pageTitle={"Samurai"} />} />
             <Route path='/settings' component={Settings} />
             <Route path='/login' render={() => <LoginPage />} />
             <Route path='*' render={() => <div>404 NOT FOUND</div>} />

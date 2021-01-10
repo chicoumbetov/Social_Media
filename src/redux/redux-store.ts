@@ -8,7 +8,7 @@ import thunkMiddleware from "redux-thunk";
 import  { reducer as formReducer } from 'redux-form';
 import appReducer from "./app-reducer";
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer, //same as profilePage: profileReducer,   means there is profilePage and profileReducer is responsible for it
     dialogsPage: dialogsReducer,    //but can't read new shorter format for instant
     usersPage: usersReducer,
@@ -19,10 +19,15 @@ let reducers = combineReducers({
 
 });
 
+type RootReducerType = typeof rootReducer; // (globalstate: GLOBALSTATE) => GLOBALSTATE
+export type AppStateType = ReturnType<RootReducerType> //define type of returnedTyped and fix it under name "RootReducerType"
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
-window.__store__ = store;
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+// @ts-ignore
+window.__store__ = store
 
 //let store = createStore(reducers, applyMiddleware(thunkMiddleware))
-export default store;
+export default store

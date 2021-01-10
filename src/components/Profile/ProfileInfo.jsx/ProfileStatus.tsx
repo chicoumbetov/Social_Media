@@ -1,7 +1,18 @@
-import React from 'react';
+import React, {ChangeEvent, Component} from 'react';
 //import classes from './ProfileInfo.module.css';
+//import { updateStatus } from '../../../redux/profile-reducer';
 
-class ProfileStatus extends React.Component {
+type PropsType = {
+    status: string
+    updateStatus: (newStatus: string) => void
+}
+
+type StateType = {
+    editMode: boolean
+    status: string
+}
+
+class ProfileStatus extends Component<PropsType, StateType> {
 
     state = {
         editMode: false,
@@ -23,13 +34,13 @@ class ProfileStatus extends React.Component {
         this.props.updateStatus(this.state.status)
     }
 
-    onStatusChange = (event) => {
+    onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             status: event.currentTarget.value
         });
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<StateType>) {
         if (prevProps.status !== this.props.status) {
             this.setState({
             status: this.props.status

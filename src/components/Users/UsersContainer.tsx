@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, unfollow, setRequestedPage, toggleFollowingProgress, getUsersThunkCreator } from "../../redux/users-reducer";
+import { follow, unfollow, getUsersThunkCreator } from '../../redux/users-reducer';
 //import * as Axios from 'axios'; now it it in api.js
 import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
@@ -17,8 +17,35 @@ import {
     getTotalUsersCount,
     getUsers
 } from '../../redux/user-selectors';
+import { UserType } from '../../types/types';
+import { AppStateType } from '../../redux/redux-store';
 
-class UsersContainer extends React.Component {
+type MapStatePropsType = {
+    //properties
+    requestedPage: number 
+    pageSize: number
+    toggleIsFetching: boolean
+    totalUsersCount: number
+    usersData: Array<UserType>
+    followingInProgress: Array<number>
+}
+
+type MapDispatchPropsType = {
+    //callbacks
+    getUsers: (requestedPage: number, pageSize: number) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
+
+//came through props
+type OwnPropsType = {
+    pageTitle: string
+}
+
+//reunions all PropsType above
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
+
+class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let {requestedPage, pageSize} = this.props;
@@ -35,7 +62,7 @@ class UsersContainer extends React.Component {
 
     }
 
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber: number) => {
         const {pageSize} = this.props; //local restructuring helped to shorten next line of code
         //this.props.getUsers(pageNumber, this.props.pageSize);
         this.props.getUsers(pageNumber, pageSize);
@@ -52,14 +79,15 @@ class UsersContainer extends React.Component {
     render() {
 
         return <>
-
+            
             { this.props.toggleIsFetching ? <Preloader className={styles.preloader} /> : null}
-
-            <div>
+            <h2 className={styles.pageTitle}>{this.props.pageTitle}</h2>
+            <div >
                 <UserInfo />
             </div>
-
-            <Users totalItemsCount={this.props.totalItemsCount}
+            <div className={styles.userInfo}>
+            <Users 
+                totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
                 requestedPage={this.props.requestedPage}
                 onPageChanged={this.onPageChanged}
@@ -70,7 +98,9 @@ class UsersContainer extends React.Component {
                 followingInProgress={this.props.followingInProgress}
 
             />
-
+            </div>
+            
+ 
         </>
 
     }
@@ -89,13 +119,13 @@ class UsersContainer extends React.Component {
     }
 }*/
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         usersData: getUsers(state),
         //UsersPage: state.UsersPage,
         //usersData: getUsers(state),
         pageSize: getPageSize(state),
-        totalItemsCount: getTotalUsersCount(state),
+        totalUsersCount: getTotalUsersCount(state),
         requestedPage: getRequestedPage(state),
         toggleIsFetching: getToggleIsFetching(state),
         followingInProgress: getFollowingInProgress(state)
@@ -104,7 +134,9 @@ let mapStateToProps = (state) => {
 
 export default compose(
     //withAuthRedirect,   //3 if I don't want this protection, then I just this line
-    connect(mapStateToProps, { follow, unfollow, setRequestedPage, toggleFollowingProgress, getUsers: getUsersThunkCreator }), //2
+    //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState
+    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType >(mapStateToProps, { follow, unfollow, getUsers: getUsersThunkCreator }), //2
+    //connect(mapStateToProps, { follow, unfollow, setRequestedPage, toggleFollowingProgress, getUsers: requestUsers })
 )(UsersContainer)  //1
 
 //export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
