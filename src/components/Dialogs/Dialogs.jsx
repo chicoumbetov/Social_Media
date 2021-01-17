@@ -1,5 +1,6 @@
 import React from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
+//import { Redirect } from 'react-router-dom';  limit access to Messages section
 import AddMessageForm from './AddMessageForm/AddMessageForm';
 import d from './Dialogs.module.css';
 //import {sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/dialogs-reducer';
@@ -37,7 +38,7 @@ const Dialogs = (props) => {
         //props.store.dispatch (sendMessageCreator());  
     }
 
-    if (!props.isAuth) return <Redirect to={"/login"} />
+    //if (!props.isAuth) return <Redirect to={"/login"} />
 
     return (<div className={d.dialogs}>
 

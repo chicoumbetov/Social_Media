@@ -47,7 +47,7 @@ class App extends Component {
     }
 
     return (
-      <div className="app-wrapper">
+      <div className="app-wrapper wholepage">
         <HeaderContainer />
         <Navbar />
 

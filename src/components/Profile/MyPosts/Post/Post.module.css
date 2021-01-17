@@ -1,15 +1,35 @@
+.allitem {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .item {
   color: black;
-  font-style: oblique;
   margin-top: 5px;
+  border: 2px solid #eee;
+  padding: 10px;
 }
 
 .item img{
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  margin-left: 40px;
   border-radius: 20px;
+  margin-right: 10px;
 }
 
-.commentButton {
+.commentButton,
+.likeButton {
   margin-left: 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  flex-wrap: wrap;
+  background: linear-gradient(to right, #1345e6 0%, #85e70d 0%, #1345e6 100%);
+}
+
+.postMessage{
+  margin-left: 20px;
+  font-weight: 500;
+  font-style: normal;
 }

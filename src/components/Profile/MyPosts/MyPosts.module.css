@@ -1,3 +1,23 @@
 .postsBlock{
-    padding: 10px;
+    
+    border: 2px solid #eee;
+}
+
+.myposttitle {
+    display: flex;
+    justify-content: center;
+    font-style: normal;
+}
+
+.mypostsection{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.addpostButton{
+    border-radius: 20px;
+    font-weight: 600;
+    margin-left: 40px;
+    background: linear-gradient(to right, #1345e6 0%, #85e70d 0%, #1345e6 100%);
 }

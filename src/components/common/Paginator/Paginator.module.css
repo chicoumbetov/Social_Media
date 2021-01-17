@@ -4,20 +4,30 @@
 
 .pageNumber {
     padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     border: 1px solid grey;
     cursor: pointer;
-    background-color: beige;
+    background: linear-gradient(to right, #1345e6 0%, #85e70d 0%, #1345e6 100%);
     border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .pageNumber.selectedPage {
     font-weight: bold;
     border-color: black;
-    
 }
 
 .paginator{
     padding: 10px;
     display: flex;
     justify-content: center;
+    border: 2px solid #eee;
+    
+}
+
+.prevnext{
+    border-radius: 15px;
+    background: linear-gradient(to right, #1345e6 0%, #85e70d 0%, #1345e6 100%);
 }

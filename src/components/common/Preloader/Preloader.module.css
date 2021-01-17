@@ -1,3 +1,10 @@
-.animation svg{
-    align-items: center;
+.animation img{
+    border-radius: 100px;
+    width: 50%;
+}
+
+.animation{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
 }

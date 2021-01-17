@@ -6,8 +6,9 @@
 }
 
 .item a{
-  color: green;
+  color: darkgreen;
   text-decoration: none; /*no underline of texts*/
+  margin: 10px;
 }
 
 .item a.activeLink {

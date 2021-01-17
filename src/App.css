@@ -1,5 +1,5 @@
 .app-wrapper {
-  padding-left: 50px;
+  padding-left: 200px;
   display: grid;
   
   width: 600px;
@@ -19,5 +19,9 @@
 .app-wrapper-content{
   
   grid-area: c;
-  background-color: silver;
+  border: 3px solid #eee;
+}
+
+.wholepage{
+  font-style: oblique;
 }

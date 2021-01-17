@@ -17,9 +17,9 @@ let AddNewPostForm = (props) => {
         placeholder={"Post message"}
         validate={[required, maxLength30]} />
     </div>
-    <div>
+    <div >
       {/*//button when u r clicked, pls call addPost*/}
-      <button>Add post</button>
+      <button className={d.addpostButton}>Add post</button>
     </div>
   </form>
 };
@@ -40,11 +40,21 @@ const MyPosts = React.memo(props => {
   }
 
   return <div className={d.postsBlock}>
-    <h4>My posts</h4>
-    <AddNewPostFormRedux onSubmit={onAddPost} />
+      <h4 className={d.myposttitle}>My posts</h4>
+    <div className={d.mypostsection}>
+      <div>
+        
+      </div>
+      <div>
+        <AddNewPostFormRedux onSubmit={onAddPost} />
+      </div>
+      
+    </div>
     <div className={d.posts}>
       {postsElements}
     </div>
+
+
   </div>
 })
 

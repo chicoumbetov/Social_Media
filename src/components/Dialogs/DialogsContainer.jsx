@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 //import { Redirect } from 'react-router-dom';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+// limit access by loginin :   import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 //import d from './Dialogs.module.css';
 import { sendMessageCreator } from '../../redux/dialogs-reducer';
 //import store from '../../redux/redux-store';
@@ -33,7 +33,7 @@ let mapDispatchToProps = (dispatch) => {
 //compose put 3 in 2. then 2 in 1.
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),   //1
-    withAuthRedirect                                //2
+    //withAuthRedirect                                //2
 ) (Dialogs)                                         //3
 
 //2//this line is also in compose//let AuthRedirectComponent = withAuthRedirect(Dialogs)
