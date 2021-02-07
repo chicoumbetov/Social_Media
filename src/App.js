@@ -28,8 +28,8 @@ class App extends Component {
 
   catchAllUnhandledErrors = (promiseRejectionEvent) => {
     //if (reason, promise) then should use thunk
-    alert(promiseRejectionEvent)
-    //console.error(promiseRejectionEvent)
+    //alert(promiseRejectionEvent)
+    console.error(promiseRejectionEvent)
   }
 
   componentDidMount() {
@@ -53,8 +53,11 @@ class App extends Component {
 
         <div className="app-wrapper-content">
           <Switch>
-            <Redirect exact from="/" to="/profile" render={withSuspense(ProfileContainer)}/>
+            {/* <Redirect exact from="/" to="/profile" render={withSuspense(ProfileContainer)} /> */}
             {/* Variant Dimych: <Route exact path='/' render={ () => <Redirect to={"/profile"}/>}/>      */}
+            <Route exact path="/">
+              <Redirect to="/profile" render={withSuspense(ProfileContainer)}/>
+            </Route>
             <Route path='/profile/:userId?'
               render={withSuspense(ProfileContainer)}
             />
@@ -68,7 +71,9 @@ class App extends Component {
             <Route path='/users' render={() => <UsersContainer pageTitle={"Samurai"} />} />
             <Route path='/settings' component={Settings} />
             <Route path='/login' render={() => <LoginPage />} />
-            <Route path='*' render={() => <div>404 NOT FOUND</div>} />
+            <Route path='/*' render={withSuspense(ProfileContainer)} />
+            {/* render={() => <div>404 NOT FOUND</div>} */}
+            
           </Switch>
         </div>
 
